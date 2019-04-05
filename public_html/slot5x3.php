@@ -22,8 +22,8 @@ $form = [
 function validate_balance() {
     $cookie = new Core\Cookie('player');
     $player = new App\Player($cookie);
-    $slot3x3 = new App\SlotMachine3x3();
-    if ($player->getBalance() >= $slot3x3->getBandymoKaina()) {
+    $slot5x3 = new App\SlotMachine5x3();
+    if ($player->getBalance() >= $slot5x3->getBandymoKaina()) {
         return true;
     }
 
@@ -36,10 +36,10 @@ if (!empty($_POST)) {
 
     if ($form_success) {
         $cookie = new Core\Cookie('player');
-        $slot3x3 = new App\SlotMachine3x3();
-        $slot3x3->Shuffle();
+        $slot5x3 = new App\SlotMachine5x3();
+        $slot5x3->Shuffle();
         $player = new App\Player($cookie);
-        $player->setBalance($slot3x3->Outcome());
+        $player->setBalance($slot5x3->Outcome());
     }
 }
 ?>
@@ -53,12 +53,12 @@ if (!empty($_POST)) {
             <div class="casino">
                 <nav>
                     <a href="index.php">HOME</a>
-                    <a href="slot5x3.php">WANT SOME MORE?</a>
+                    <a href="slot3x3.php">WANT SOME MORE?</a>
                 </nav>
-                <h1>IN SPIN WE TRUST 3x3</h1>
-                <?php if (isset($slot3x3)): ?>
+                <h1>IN SPIN WE TRUST 5x3</h1>
+                <?php if (isset($slot5x3)): ?>
                     <div class="slotmachine">
-                        <?php foreach ($slot3x3->getState() as $column): ?>
+                        <?php foreach ($slot5x3->getState() as $column): ?>
                             <div class="row">
                                 <?php foreach ($column as $col_data): ?>
                                     <div class="element element-<?php print $col_data; ?>"></div>
@@ -66,7 +66,7 @@ if (!empty($_POST)) {
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <?php if ($slot3x3->isWin()): ?>
+                    <?php if ($slot5x3->isWin()): ?>
                         <h2>YOU WIN</h2>
                     <?php else: ?>
                         <h2>PLAY AGAIN</h2>
