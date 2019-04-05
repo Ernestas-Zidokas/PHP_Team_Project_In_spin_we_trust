@@ -6,7 +6,7 @@ $form = [
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'Paduoti!'
+            'text' => 'SPIN&WIN!'
         ]
     ],
     'callbacks' => [
@@ -27,25 +27,25 @@ $form = [
         <div class="relative">
             <div class="casino">
                 <nav>
-                    <a href="index.php">Home</a>
-                    <a href="slot5x5.php">Wanna more?</a>
+                    <a href="index.php">HOME</a>
+                    <a href="slot5x5.php">WANT SOME MORE?</a>
                 </nav>
-                <h1>3x3</h1>
+                <h1>IN SPIN WE TRUST</h1>
                 <div class="slotmachine">
                     <div class="row">
                         <div class="element element-1">1</div>
-                        <div class="element element-1">1</div>
+                        <div class="element element-3">1</div>
+                        <div class="element element-2">1</div>
+                    </div>
+                    <div class="row">
+                        <div class="element element-3">1</div>
+                        <div class="element element-2">1</div>
                         <div class="element element-1">1</div>
                     </div>
                     <div class="row">
                         <div class="element element-1">1</div>
-                        <div class="element element-1">1</div>
-                        <div class="element element-1">1</div>
-                    </div>
-                    <div class="row">
-                        <div class="element element-1">1</div>
-                        <div class="element element-1">1</div>
-                        <div class="element element-1">1</div>
+                        <div class="element element-2">1</div>
+                        <div class="element element-3">1</div>
                     </div>
                 </div>
                 <?php require '../core/views/form.php'; ?>

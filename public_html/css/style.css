@@ -1,15 +1,13 @@
 .relative{
-    
     text-align: center;
+    background-color: black;
 }
-
 .casino{
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 .slotmachine{
     display:flex;
     flex-direction: column;
@@ -33,5 +31,11 @@
     background-size: cover; 
 }
 .element-1{
-    background-image: url("../images/ateinicia.jpg")
+    background-image: url("../images/bananas.jpg")
+}
+.element-2{
+    background-image: url("../images/noballs.jpg")
+}
+.element-3{
+    background-image: url("../images/tits.gif")
 }
