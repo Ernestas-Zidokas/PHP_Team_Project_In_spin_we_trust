@@ -150,7 +150,10 @@ Class FileDB {
             return false;
         }
     }
-
+    
+    public function rowExists($table, $row_id){
+        return isset($this->data[$table][$row_id]) ? true : false;
+    }
 }
 
 ?>

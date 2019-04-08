@@ -4,6 +4,9 @@ namespace Core\User;
 
 Class User extends Abstracts\User {
 
+    const ACCOUNT_TYPE_USER = 1;
+    const ACCOUNT_TYPE_ADMIN = 0;
+
     public function __construct($data = null) {
         if (!$data) {
             $this->data = [
@@ -36,7 +39,11 @@ Class User extends Abstracts\User {
     }
 
     public function setAccountType(int $type) {
-        $this->data['account_type'] = $type;
+        if (in_array($type, [self::ACCOUNT_TYPE_ADMIN, self::ACCOUNT_TYPE_USER])) {
+            $this->data['account_type'] = $type;
+
+            return true;
+        }
     }
 
     public function setIsActive(bool $active) {
@@ -48,13 +55,7 @@ Class User extends Abstracts\User {
     }
 
     public function setData(array $data) {
-        $this->setUsername($data['username'] ?? '');
-        $this->setEmail($data['email'] ?? '');
-        $this->setFullName($data['full_name'] ?? '');
-        $this->setAge($data['age'] ?? null);
-        $this->setGender($data['gender'] ?? '');
-        $this->setOrientation($data['orientation'] ?? '');
-        $this->setPhoto($data['photo'] ?? '');
+        parent::setData($data);
         $this->setIsActive($data['is_active'] ?? null);
         $this->setAccountType($data['account_type'] ?? null);
         $this->setPassword($data['password'] ?? '');
