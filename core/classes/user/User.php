@@ -47,4 +47,17 @@ Class User extends Abstracts\User {
         $this->data['password'] = $password;
     }
 
+    public function setData(array $data) {
+        $this->setUsername($data['username'] ?? '');
+        $this->setEmail($data['email'] ?? '');
+        $this->setFullName($data['full_name'] ?? '');
+        $this->setAge($data['age'] ?? null);
+        $this->setGender($data['gender'] ?? '');
+        $this->setOrientation($data['orientation'] ?? '');
+        $this->setPhoto($data['photo'] ?? '');
+        $this->setIsActive($data['is_active'] ?? null);
+        $this->setAccountType($data['account_type'] ?? null);
+        $this->setPassword($data['password'] ?? '');
+    }
+
 }
