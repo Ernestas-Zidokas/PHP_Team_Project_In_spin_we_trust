@@ -27,7 +27,8 @@ class Session extends \Core\User\Abstracts\Session {
                     $_SESSION['email'] = $email;
                     $_SESSION['password'] = $password;
                     $this->user = $user;
-
+                    $this->isLoggedIn() = true;
+                    
                     return self::LOGIN_SUCCESS;
                 }
 
@@ -55,9 +56,8 @@ class Session extends \Core\User\Abstracts\Session {
      */
     public function logout() {
         $_SESSION = [];
-        setcookie(session_id(), "", time() - 3600);
+        setcookie(session_name(), "", time() - 3600);
         session_destroy();
-        session_write_close();
         $this->isLoggedIn() = false;
         $this->user = null;
     }
