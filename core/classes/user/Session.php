@@ -7,6 +7,7 @@ class Session extends \Core\User\Abstracts\Session {
     public function __construct(\Core\User\Repository $repo) {
         $this->repo = $repo;
         $this->is_logged_in = false;
+        session_start();
     }
 
     public function getUser(): Abstracts\User {
@@ -17,25 +18,6 @@ class Session extends \Core\User\Abstracts\Session {
         return $this->is_logged_in;
     }
 
-    /**
-     * Bando user'į priloginti per $email ir $password
-     * 
-     * Jeigu blogas passwordas/email, return'inti
-     * LOGIN_ERR_CREDENTIALS
-     * 
-     * Jeigu useris not active, return'inti
-     * LOGIN_ERR_NOT_ACTIVE
-     * 
-     * Jeigu viskas gerai: 
-     * 1# į $_SESSION išsaugoti email ir password
-     * 2# nusettinti $this->user
-     * 3# return'inti LOGIN_SUCCESS
-     * 
-     *      * 
-     * @param type $email
-     * @param type $password
-     * @return int
-     */
     public function login($email, $password): int {
         $user = $this->repo->load($email);
 
@@ -57,11 +39,27 @@ class Session extends \Core\User\Abstracts\Session {
     }
 
     public function loginViaCookie() {
-        
+        if (isset($_SESSION['email']) && isset($_SESSION['password'])) {
+            return $this->login($_SESSION['email'], $_SESSION['password']);
+        }
+
+        return self::LOGIN_ERR_CREDENTIALS;
     }
 
+    /**
+     * Išvalyti $_SESSION
+     * užbaigti sesiją (Google)
+     * ištrinti sesijos cookie (Google)
+     * nustatyti is_logged_in
+     * nustatyti $this->user
+     */
     public function logout() {
-        
+        $_SESSION = [];
+        setcookie(session_id(), "", time() - 3600);
+        session_destroy();
+        session_write_close();
+        $this->isLoggedIn() = false;
+        $this->user = null;
     }
 
 }
