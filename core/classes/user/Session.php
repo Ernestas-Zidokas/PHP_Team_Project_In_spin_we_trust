@@ -5,7 +5,7 @@ namespace Core\User;
 class Session extends \Core\User\Abstracts\Session {
     
     public function __construct(\Core\Modules\User\Repository $repo) {
-        
+        $this->repo = $repo;
     }
 
     public function getUser(): Abstracts\User {
@@ -13,7 +13,7 @@ class Session extends \Core\User\Abstracts\Session {
     }
 
     public function isLoggedIn() {
-        
+        return $this->is_logged_in;
     }
 
     public function login($email, $password): int {
