@@ -38,7 +38,7 @@ class Session extends \Core\User\Abstracts\Session {
      */
     public function login($email, $password): int {
         $user = $this->repo->load($email);
-        
+
         if ($user) {
             if ($user->getPassword() === $password) {
                 if ($user->getIsActive()) {
@@ -51,9 +51,9 @@ class Session extends \Core\User\Abstracts\Session {
 
                 return self::LOGIN_ERR_NOT_ACTIVE;
             }
-
-            return self::LOGIN_ERR_CREDENTIALS;
         }
+
+        return self::LOGIN_ERR_CREDENTIALS;
     }
 
     public function loginViaCookie() {
