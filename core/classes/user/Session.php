@@ -6,6 +6,7 @@ class Session extends \Core\User\Abstracts\Session {
     
     public function __construct(\Core\Modules\User\Repository $repo) {
         $this->repo = $repo;
+        $this->is_logged_in = false;
     }
 
     public function getUser(): Abstracts\User {
