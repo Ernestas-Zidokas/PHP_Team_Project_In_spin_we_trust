@@ -8,10 +8,11 @@ class Session extends \Core\User\Abstracts\Session {
         $this->repo = $repo;
         $this->is_logged_in = false;
         session_start();
+        $this->loginViaCookie();
     }
 
     public function getUser(): Abstracts\User {
-        
+        return $this->user;
     }
 
     public function isLoggedIn() {
@@ -56,9 +57,9 @@ class Session extends \Core\User\Abstracts\Session {
      */
     public function logout() {
         $_SESSION = [];
-        setcookie(session_name(), "", time() - 3600);
+        setcookie(session_name(),"", time() - 3600);
         session_destroy();
-        $this->isLoggedIn() = false;
+        $this->is_logged_in = false;
         $this->user = null;
     }
 
