@@ -46,8 +46,9 @@ class Session extends \Core\User\Abstracts\Session {
                     $this->user = $user;
 
                     return self::LOGIN_SUCCESS;
+                } else {
+                    return self::LOGIN_ERR_NOT_ACTIVE;
                 }
-                return self::LOGIN_ERR_NOT_ACTIVE;
             } else {
                 return self::LOGIN_ERR_CREDENTIALS;
             }
