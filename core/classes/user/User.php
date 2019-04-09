@@ -46,6 +46,13 @@ Class User extends Abstracts\User {
         }
     }
 
+    public static function getAccountTypeOptions() {
+        return [
+            self::ACCOUNT_TYPE_USER => 'User',
+            self::ACCOUNT_TYPE_ADMIN => 'Admin'
+        ];
+    }
+
     public function setIsActive(bool $active) {
         $this->data['is_active'] = $active;
     }

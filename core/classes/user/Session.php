@@ -11,7 +11,7 @@ class Session extends \Core\User\Abstracts\Session {
         $this->loginViaCookie();
     }
 
-    public function getUser(): Abstracts\User {
+    public function getUser() {
         return $this->user;
     }
 
@@ -48,13 +48,6 @@ class Session extends \Core\User\Abstracts\Session {
         return self::LOGIN_ERR_CREDENTIALS;
     }
 
-    /**
-     * Išvalyti $_SESSION
-     * užbaigti sesiją (Google)
-     * ištrinti sesijos cookie (Google)
-     * nustatyti is_logged_in
-     * nustatyti $this->user
-     */
     public function logout() {
         $_SESSION = [];
         setcookie(session_name(),"", time() - 3600);
