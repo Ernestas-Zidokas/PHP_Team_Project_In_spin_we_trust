@@ -53,7 +53,7 @@ class Session extends \Core\User\Abstracts\Session {
                 return self::LOGIN_ERR_CREDENTIALS;
             }
             
-            return 'Nera tokio userio';
+            return self::LOGIN_ERR_CREDENTIALS;
         }
     }
 
