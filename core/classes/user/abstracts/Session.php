@@ -2,10 +2,15 @@
 
 namespace Core\User\Abstracts;
 
+/**
+ * Abstract Session
+ */
 abstract class Session {
-
+    /** @var \Core\User\Repository */
     protected $repo;
     protected $is_logged_in;
+    
+    /** @var \Core\User\User */
     protected $user;
 
     const LOGIN_SUCCESS = 1;
@@ -16,7 +21,7 @@ abstract class Session {
      * Konstruktorius pradeda sesiją ir bando
      * user'į prijungti su Cookie
      */
-    abstract public function __construct(\Core\Modules\User\Repository $repo);
+    abstract public function __construct(\Core\User\Repository $repo);
 
     /**
      * Grazina $is_logged_in;
