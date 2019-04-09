@@ -39,15 +39,15 @@ class Session extends \Core\User\Abstracts\Session {
     public function login($email, $password): int {
         $user = $this->repo->load($email);
         if ($user) {
-            if ($user->getEmail() == $email && $user->getPassword() == $password) {
-                if (!$user->getIsActive()) {
-                    return self::LOGIN_ERR_NOT_ACTIVE;
+            if ($user->getEmail() === $email && $user->getPassword() === $password) {
+                if ($user->getIsActive()) {
+                    $_SESSION['email'] = $email;
+                    $_SESSION['password'] = $password;
+                    $this->user = $user;
+
+                    return self::LOGIN_SUCCESS;
                 }
-                $_SESSION['email'] = $email;
-                $_SESSION['password'] = $password;
-                $this->user = $user;
-                
-                return self::LOGIN_SUCCESS;
+                return self::LOGIN_ERR_NOT_ACTIVE;
             } else {
                 return self::LOGIN_ERR_CREDENTIALS;
             }
