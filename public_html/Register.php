@@ -62,27 +62,30 @@ $form = [
             'label' => 'Gender',
             'type' => 'select',
             'placeholder' => '',
-            'options' => Core\User\Abstracts\User::getGenderOptions(),
+            'options' => \Core\User\User::getGenderOptions(),
             'validate' => [
-                'validate_not_empty'
+                'validate_not_empty',
+                'validate_field_select'
             ]
         ],
         'orientation' => [
             'label' => 'Orientation',
             'type' => 'select',
             'placeholder' => '',
-            'options' => Core\User\Abstracts\User::getOrientationOptions(),
+            'options' => \Core\User\User::getOrientationOptions(),
             'validate' => [
-                'validate_not_empty'
+                'validate_not_empty',
+                'validate_field_select'
             ],
         ],
         'account_type' => [
             'label' => 'Account type',
             'type' => 'select',
             'placeholder' => '',
-            'options' => Core\User\User::getAccountTypeOptions(),
+            'options' => \Core\User\User::getAccountTypeOptions(),
             'validate' => [
-                'validate_not_empty'
+                'validate_not_empty',
+                'validate_field_select'
             ]
         ],
         'photo' => [
@@ -96,8 +99,8 @@ $form = [
     ],
     'validate' => [
         'validate_password',
+        'validate_user_exists',
         'validate_form_file'
-        
     ],
     'buttons' => [
         'submit' => [
@@ -117,6 +120,19 @@ function validate_password(&$safe_input, &$form) {
         return true;
     } else {
         $form['error_msg'] = 'Jobans/a tu buhurs/gazele passwordai nesutampa!';
+    }
+}
+
+function validate_user_exists(&$safe_input, &$form) {
+    $user = new Core\User\User();
+    $user->setEmail($safe_input['email']);
+    $db = new Core\FileDB(DB_FILE);
+    $repo = new Core\User\Repository($db, TABLE_USERS);
+
+    if (!$repo->exists($user)) {
+        return true;
+    } else {
+        $form['error_msg'] = 'Tokiu emailu useris jau yra!';
     }
 }
 
@@ -177,7 +193,11 @@ if (!empty($_POST)) {
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <?php require '../core/views/form.php'; ?>
+        <div class="container">
+            <div class="forma">
+                <?php require '../core/views/form.php'; ?>
+            </div>
+        </div>
         <?php if (isset($success_msg)): ?>
             <h3><?php print $success_msg; ?></h3>
         <?php endif; ?>

@@ -126,7 +126,7 @@ function validate_file($field_input, &$field, &$safe_input) {
             return true;
         }
     }
-    
+
     $field['error_msg'] = 'Nenurodei fotkes';
 }
 
@@ -166,6 +166,16 @@ function validate_more_4_chars($field_input, &$field, &$safe_input) {
     } else {
         $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
                 . 'nes @field privalo buti ilgesnis nei 4 simboliai', ['@field' => $field['label']
+        ]);
+    }
+}
+
+function validate_field_select($field_input, &$field, &$safe_input) {
+    if (array_key_exists($field_input, $field['options'])) {
+        return true;
+    } else {
+        $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
+                . 'nes @field yra neteisingas', ['@field' => $field['label']
         ]);
     }
 }

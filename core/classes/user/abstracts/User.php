@@ -66,8 +66,8 @@ abstract class User {
 
     public function setOrientation(string $orientation) {
         if (in_array($orientation, [
-                    $this::ORIENTATION_GAY,
                     $this::ORIENTATION_STRAIGHT,
+                    $this::ORIENTATION_GAY,
                     $this::ORIENTATION_BISEXUAL])) {
             $this->data['orientation'] = $orientation;
 
