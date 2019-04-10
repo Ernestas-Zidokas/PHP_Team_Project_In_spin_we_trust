@@ -52,6 +52,7 @@ if (!empty($_POST)) {
         <div class="relative">
             <div class="casino">
                 <nav>
+                    <a href="register.php">REGISTER</a>
                     <a href="index.php">HOME</a>
                     <a href="slot3x3.php">WANT SOME MORE?</a>
                 </nav>

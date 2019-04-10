@@ -130,3 +130,44 @@ function validate_file($field_input, &$field, &$safe_input) {
         $field['error_msg'] = 'Nenurodei fotkes';
     }
 }
+
+function validate_email($field_input, &$field, &$safe_input) {
+    if (preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $safe_input['email'])) {
+        return true;
+    } else {
+
+        $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
+                . 'nes @field blogai uzrasytas!', ['@field' => $field['label']
+        ]);
+    }
+}
+
+function validate_age($field_input, &$field, &$safe_input) {
+    if ($safe_input['age'] > 0) {
+        return true;
+    } else {
+        $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
+                . 'nes @field negali but mazesnis uz 0!', ['@field' => $field['label']
+        ]);
+    }
+}
+
+function validate_contains_space($field_input, &$field, &$safe_input) {
+    if (preg_match('/\s/', $safe_input['full_name'])) {
+        return true;
+    } else {
+        $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
+                . 'nes @field privalo tureti tarpa!', ['@field' => $field['label']
+        ]);
+    }
+}
+
+function validate_more_4_chars($field_input, &$field, &$safe_input) {
+    if (strlen($safe_input['full_name']) > 4) {
+        return true;
+    } else {
+        $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
+                . 'nes @field privalo buti ilgesnis nei 4 simboliai', ['@field' => $field['label']
+        ]);
+    }
+}

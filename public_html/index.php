@@ -23,7 +23,7 @@ $form = [
     ],
     'validate' => [],
     'callbacks' => [
-        'success' => [            
+        'success' => [
         ],
         'fail' => []
     ],
@@ -48,6 +48,7 @@ if (!empty($_POST)) {
     </head>
     <body>
         <nav>
+            <a href="register.php">REGISTER</a>
             <a href="slot3x3.php">PLAY FOR NOOBS</a>
             <a href="slot5x3.php">PLAY FOR REAL MEN</a>
         </nav>

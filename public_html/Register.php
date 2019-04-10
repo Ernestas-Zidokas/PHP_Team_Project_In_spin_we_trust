@@ -18,12 +18,21 @@ $form = [
             'placeholder' => 'email@gmail.com',
             'validate' => [
                 'validate_not_empty',
+                'validate_email'
             ]
         ],
         'password' => [
             'label' => 'Password',
             'type' => 'password',
-            'placeholder' => '',
+            'placeholder' => '********',
+            'validate' => [
+                'validate_not_empty'
+            ]
+        ],
+        'password_again' => [
+            'label' => 'Password again',
+            'type' => 'password',
+            'placeholder' => '********',
             'validate' => [
                 'validate_not_empty'
             ]
@@ -33,7 +42,9 @@ $form = [
             'type' => 'text',
             'placeholder' => 'Ernestas Zidokas',
             'validate' => [
-                'validate_not_empty'
+                'validate_not_empty',
+                'validate_contains_space',
+                'validate_more_4_chars'
             ]
         ],
         'age' => [
@@ -44,7 +55,8 @@ $form = [
             'max' => 999,
             'validate' => [
                 'validate_not_empty',
-                'validate_is_number'
+                'validate_is_number',
+                'validate_age'
             ]
         ],
         'gender' => [
@@ -84,7 +96,8 @@ $form = [
         ],
     ],
     'validate' => [
-        'validate_form_file'
+        'validate_form_file',
+        'validate_password'
     ],
     'buttons' => [
         'submit' => [
@@ -99,6 +112,14 @@ $form = [
     ]
 ];
 
+function validate_password(&$safe_input, &$form) {
+    if ($safe_input['password'] === $safe_input['password_again']) {
+        return true;
+    } else {
+        $form['error_msg'] = 'Jobans/a tu buhurs/gazele passwordai nesutampa!';
+    }
+}
+
 function form_success($safe_input, $form) {
     $user = new Core\User\User([
         'username' => $safe_input['username'],
@@ -112,7 +133,7 @@ function form_success($safe_input, $form) {
         'photo' => $safe_input['photo'],
         'is_active' => true
     ]);
-    
+
     $db = new Core\FileDB(DB_FILE);
     $repo = new Core\User\Repository($db, TABLE_USERS);
     $repo->insert($user);
@@ -136,6 +157,7 @@ function save_file($file, $dir = 'uploads', $allowed_types = ['image/png', 'imag
             return $target_file_name;
         }
     }
+
     return false;
 }
 
@@ -148,7 +170,6 @@ if (!empty($_POST)) {
         ]);
     }
 }
-$db = new Core\FileDB(DB_FILE);
 ?>
 <html>
     <head>
