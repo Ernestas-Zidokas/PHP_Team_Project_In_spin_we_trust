@@ -1,6 +1,5 @@
 <?php
 require_once '../bootloader.php';
-define('USER', 'input_users');
 
 $form = [
     'fields' => [
@@ -96,8 +95,9 @@ $form = [
         ],
     ],
     'validate' => [
-        'validate_form_file',
-        'validate_password'
+        'validate_password',
+        'validate_form_file'
+        
     ],
     'buttons' => [
         'submit' => [
@@ -177,7 +177,6 @@ if (!empty($_POST)) {
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-
         <?php require '../core/views/form.php'; ?>
         <?php if (isset($success_msg)): ?>
             <h3><?php print $success_msg; ?></h3>

@@ -120,22 +120,20 @@ function validate_is_number($field_input, &$field, $safe_input) {
 
 function validate_file($field_input, &$field, &$safe_input) {
     $file = $_FILES[$field['id']] ?? false;
-
     if ($file) {
         if ($file['error'] == 0) {
             $safe_input[$field['id']] = $file;
             return true;
         }
-    } else {
-        $field['error_msg'] = 'Nenurodei fotkes';
     }
+    
+    $field['error_msg'] = 'Nenurodei fotkes';
 }
 
 function validate_email($field_input, &$field, &$safe_input) {
     if (preg_match("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$^", $safe_input['email'])) {
         return true;
     } else {
-
         $field['error_msg'] = strtr('Jobans/a tu buhurs/gazele, '
                 . 'nes @field blogai uzrasytas!', ['@field' => $field['label']
         ]);
