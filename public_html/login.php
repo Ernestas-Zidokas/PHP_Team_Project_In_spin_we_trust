@@ -55,7 +55,7 @@ if (!empty($_POST)) {
             '@username' => $safe_input['email']
         ]);
     } else {
-        $success_msg = strtr('User "@username" nepavyko prisijungti!', [
+        $success_msg = strtr('User "@username" nepavyko prisijungti, nes blogas Email/Password!', [
             '@username' => $safe_input['email']
         ]);
     }
