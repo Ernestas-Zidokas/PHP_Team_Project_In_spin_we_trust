@@ -1,63 +1,60 @@
 <?php
 require_once '../bootloader.php';
 
+redirect();
+
 $form = [
     'fields' => [
-        'email' => [
-            'label' => 'Email',
-            'type' => 'text',
-            'placeholder' => 'email@gmail.com',
-            'validate' => [
-                'validate_not_empty',
-                'validate_email'
-            ]
-        ],
-        'password' => [
-            'label' => 'Password',
-            'type' => 'password',
-            'placeholder' => '********',
-            'validate' => [
-                'validate_not_empty'
-            ]
-        ]
-    ],
-    'validate' => [
-        'validate_login'
     ],
     'buttons' => [
         'submit' => [
-            'text' => 'Login!'
+            'text' => 'Logout!'
         ]
+    ],
+    'validate' => [
+        'validate_logout'
     ],
     'callbacks' => [
         'success' => [
-           
+            'form_success'
         ],
         'fail' => []
     ]
 ];
 
-function validate_login(&$safe_input, &$form) {
+function redirect() {
     $db = new Core\FileDB(DB_FILE);
     $repo = new \Core\User\Repository($db, TABLE_USERS);
     $session = new Core\User\Session($repo);
 
-    $status = $session->login($safe_input['email'], $safe_input['password']);
-    switch ($status) {
-        case Core\User\Session::LOGIN_SUCCESS:
-            return true;
+    if (!$session->isLoggedIn() === true) {
+        header('Location: login.php');
+        exit();
     }
-    
-    $form['error_msg'] = 'Blogas Email/Password!';
+}
+
+function form_success($safe_input, $form) {
+    header('Location: login.php');
+    exit();
+}
+
+function validate_logout(&$safe_input, &$form) {
+    $db = new Core\FileDB(DB_FILE);
+    $repo = new \Core\User\Repository($db, TABLE_USERS);
+    $session = new Core\User\Session($repo);
+
+    if ($session->isLoggedIn() === true) {
+        $session->logout();
+
+        return true;
+    }
 }
 
 if (!empty($_POST)) {
     $safe_input = get_safe_input($form);
     $form_success = validate_form($safe_input, $form);
     if ($form_success) {
-        $success_msg = strtr('User "@username" sėkmingai prisijungei!', [
-            '@username' => $safe_input['email']
-        ]);
+        $success_msg = 'Sekmingai atsijungete';
     }
 }
 ?>
@@ -70,7 +67,7 @@ if (!empty($_POST)) {
         <nav>
             <a href="index.php">Index</a>
             <a href="register.php">Register</a>
-            <a href="logout.php">Logout</a>
+            <a href="login.php">Login</a>
             <a href="slot3x3.php">PLAY FOR NOOBS</a>
             <a href="slot5x3.php">PLAY FOR REAL MEN</a>
         </nav>

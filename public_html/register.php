@@ -182,7 +182,8 @@ if (!empty($_POST)) {
     <body>
         <nav>
             <a href="index.php">Index</a>
-            <a href="login.php">Login</a>
+            <a href="logout.php">Register</a>
+            <a href="login.php">Register</a>
             <a href="slot3x3.php">PLAY FOR NOOBS</a>
             <a href="slot5x3.php">PLAY FOR REAL MEN</a>
         </nav>
