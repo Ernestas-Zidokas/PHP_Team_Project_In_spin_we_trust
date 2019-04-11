@@ -146,6 +146,7 @@ function validate_form_file(&$safe_input, &$form) {
     $file_saved_url = save_file($safe_input['photo']);
     if ($file_saved_url) {
         $safe_input['photo'] = 'uploads/' . $file_saved_url;
+
         return true;
     } else {
         $form['error_msg'] = 'Jobans/a tu buhurs/gazele nes failas supistas!';
@@ -167,6 +168,7 @@ function save_file($file, $dir = 'uploads', $allowed_types = ['image/png', 'imag
 if (!empty($_POST)) {
     $safe_input = get_safe_input($form);
     $form_success = validate_form($safe_input, $form);
+
     if ($form_success) {
         $success_msg = strtr('User "@username" sėkmingai sukurtas!', [
             '@username' => $safe_input['username']

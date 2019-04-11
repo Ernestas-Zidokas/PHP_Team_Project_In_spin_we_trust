@@ -52,9 +52,11 @@ if (!empty($_POST)) {
         <div class="relative">
             <div class="casino">
                 <nav>
-                    <a href="register.php">REGISTER</a>
-                    <a href="index.php">HOME</a>
-                    <a href="slot5x3.php">WANT SOME MORE?</a>
+                    <a href="register.php">Register</a>
+                    <a href="login.php">Login</a>
+                    <a href="logout.php">Logout</a>    
+                    <a href="index.php">PLAY FOR NOOBS</a>
+                    <a href="slot5x3.php">PLAY FOR REAL MEN</a>
                 </nav>
                 <h1>IN SPIN WE TRUST 3x3</h1>
                 <?php if (isset($slot3x3)): ?>

@@ -53,6 +53,7 @@ function validate_logout(&$safe_input, &$form) {
 if (!empty($_POST)) {
     $safe_input = get_safe_input($form);
     $form_success = validate_form($safe_input, $form);
+
     if ($form_success) {
         $success_msg = 'Sekmingai atsijungete';
     }

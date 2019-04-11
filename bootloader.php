@@ -2,7 +2,7 @@
 declare (strict_types = 1);
 
 define ('ROOT_DIR', __DIR__);
-define ('DB_FILE', ROOT_DIR . '/app/db.txt');
+define ('DB_FILE', ROOT_DIR . '/app/files/db.txt');
 define ('TABLE_USERS', 'users');
 
 
