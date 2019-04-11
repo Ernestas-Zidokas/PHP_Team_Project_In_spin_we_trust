@@ -40,6 +40,10 @@ if (!empty($_POST)) {
         $player->setBalance(intval($safe_input['money']));
     }
 }
+
+$db = new Core\FileDB(DB_FILE);
+$repo = new \Core\User\Repository($db, TABLE_USERS);
+$session = new Core\User\Session($repo);
 ?>
 <html>
     <head>
@@ -48,11 +52,16 @@ if (!empty($_POST)) {
     </head>
     <body>
         <nav>
-            <a href="register.php">REGISTER</a>
+            <a href="logout.php">Logout</a>
+            <a href="register.php">Register</a>
+            <a href="login.php">Login</a>
             <a href="slot3x3.php">PLAY FOR NOOBS</a>
             <a href="slot5x3.php">PLAY FOR REAL MEN</a>
         </nav>
         <h1>P-OOPINIGU CASINO</h1>
+        <?php if ($session->isLoggedIn()): ?>
+            <h1>Sveikinu! Esi prisijunges</h1>
+        <?php endif; ?>
         <?php if ($cookie->exists()): ?>
             <h2>Balansas: <?php print $player->getBalance(); ?>$</h2>
         <?php endif; ?>
