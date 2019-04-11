@@ -17,7 +17,8 @@ $form = [
             'placeholder' => 'email@gmail.com',
             'validate' => [
                 'validate_not_empty',
-                'validate_email'
+                'validate_email',
+                'validate_user_exists'
             ]
         ],
         'password' => [
@@ -99,7 +100,6 @@ $form = [
     ],
     'validate' => [
         'validate_password',
-        'validate_user_exists',
         'validate_form_file'
     ],
     'buttons' => [
@@ -120,19 +120,6 @@ function validate_password(&$safe_input, &$form) {
         return true;
     } else {
         $form['error_msg'] = 'Jobans/a tu buhurs/gazele passwordai nesutampa!';
-    }
-}
-
-function validate_user_exists(&$safe_input, &$form) {
-    $user = new Core\User\User();
-    $user->setEmail($safe_input['email']);
-    $db = new Core\FileDB(DB_FILE);
-    $repo = new Core\User\Repository($db, TABLE_USERS);
-
-    if (!$repo->exists($user)) {
-        return true;
-    } else {
-        $form['error_msg'] = 'Tokiu emailu useris jau yra!';
     }
 }
 
@@ -193,6 +180,12 @@ if (!empty($_POST)) {
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
+        <nav>
+            <a href="index.php">Index</a>
+            <a href="login.php">Login</a>
+            <a href="slot3x3.php">PLAY FOR NOOBS</a>
+            <a href="slot5x3.php">PLAY FOR REAL MEN</a>
+        </nav>
         <div class="container">
             <div class="forma">
                 <?php require '../core/views/form.php'; ?>

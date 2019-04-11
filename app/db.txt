@@ -1,1 +1,1 @@
-{"users":{"ernestas.zidokas@gmail.com":{"username":"Katamaranas","email":"ernestas.zidokas@gmail.com","full_name":"Ernestas Zidokas","age":26,"gender":"f","orientation":"g","photo":"uploads\/0.99527600 1554888633-banana.gif","is_active":true,"account_type":1,"password":"lol"}}}
+{"users":{"ernestas.zidokas@gmail.com":{"username":"Katamaranas","email":"ernestas.zidokas@gmail.com","full_name":"Ernestas Zidokas","age":26,"gender":"m","orientation":"s","photo":"uploads\/0.40157200 1554967761-banana.gif","is_active":true,"account_type":0,"password":"lol"}}}

@@ -28,7 +28,7 @@ class Session extends \Core\User\Abstracts\Session {
                     $_SESSION['email'] = $email;
                     $_SESSION['password'] = $password;
                     $this->user = $user;
-                    $this->isLoggedIn() = true;
+                    $this->is_logged_in = true;
                     
                     return self::LOGIN_SUCCESS;
                 }
