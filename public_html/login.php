@@ -45,6 +45,8 @@ function validate_login(&$safe_input, &$form) {
         case Core\User\Session::LOGIN_SUCCESS:
             return true;
     }
+    
+    $form['error_msg'] = 'Blogas Email/Password!';
 }
 
 if (!empty($_POST)) {
@@ -52,10 +54,6 @@ if (!empty($_POST)) {
     $form_success = validate_form($safe_input, $form);
     if ($form_success) {
         $success_msg = strtr('User "@username" sėkmingai prisijungei!', [
-            '@username' => $safe_input['email']
-        ]);
-    } else {
-        $success_msg = strtr('User "@username" nepavyko prisijungti, nes blogas Email/Password!', [
             '@username' => $safe_input['email']
         ]);
     }
