@@ -44,6 +44,7 @@ if (!empty($_POST)) {
 $db = new Core\FileDB(DB_FILE);
 $repo = new \Core\User\Repository($db, TABLE_USERS);
 $session = new Core\User\Session($repo);
+$session->getUser()->getEmail();
 ?>
 <html>
     <head>
@@ -52,15 +53,15 @@ $session = new Core\User\Session($repo);
     </head>
     <body>
         <nav>
-            <a href="logout.php">Logout</a>
             <a href="register.php">Register</a>
             <a href="login.php">Login</a>
+            <a href="logout.php">Logout</a>          
             <a href="slot3x3.php">PLAY FOR NOOBS</a>
             <a href="slot5x3.php">PLAY FOR REAL MEN</a>
         </nav>
         <h1>P-OOPINIGU CASINO</h1>
         <?php if ($session->isLoggedIn()): ?>
-            <h1>Sveikinu! Esi prisijunges</h1>
+        <h1>Sveikinu! <?php print $session->getUser()->getUsername(); ?> esi prisijunges</h1>
         <?php endif; ?>
         <?php if ($cookie->exists()): ?>
             <h2>Balansas: <?php print $player->getBalance(); ?>$</h2>
